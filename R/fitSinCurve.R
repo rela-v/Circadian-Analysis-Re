@@ -36,6 +36,6 @@ fitSineCurve <- function(xx, observed, parStartVal) {
   SST <- sum((observed - mean(observed))^2)
   R2 <- 1 - SSE/SST
   res <- list(A=A, phase=phase, offset=offset, peak=peak, R2=R2)
-  res
-  print("fitSinCurve.R: Loading complete.")
+  print("fitSinCurve.R: Protocol complete.")
+  return(res)
 }
