@@ -70,8 +70,6 @@ bestModelSelection <- function(aGeneIndex,expressionMatrix,covariables3,Diagnosi
     stop('length of best BIC variables error')
   }
   
-  
-  
   bestNullfm = lmer(bestNullFormula,REML=FALSE)
   lrt.pvalue = anova(bestfm,bestNullfm)['bestfm','Pr(>Chisq)']
   
