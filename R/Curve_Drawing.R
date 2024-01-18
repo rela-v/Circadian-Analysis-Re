@@ -20,8 +20,8 @@ circadianDrawing <- function(tod, expr, apar, labels, specInfo=NULL){
   plot(tod,expr,col=labelColor, pch=16,cex=2,
        main=amain,xlim=c(-6,18),
        xlab='TOD',ylab='Expression')
-  smoothingSpline = smooth.spline(times, pred, spar=0.35)
+  smoothingSpline = smooth.spline(x=times, y=pred, spar=0.35, pi0=1, lambda=seq(0.1, max(p) - 0.05, 0.05))
   lines(smoothingSpline,col='red',lwd=4)
-  box(which = "plot", lty = "solid",lwd=3)	
+  box(which = "plot", lty = "solid",lwd=3)
   #legend('topright',legend=unique(labels),col=unique(labelColor),pch=16,cex=2)
 }

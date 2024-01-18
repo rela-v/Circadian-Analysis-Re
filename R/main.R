@@ -2,7 +2,7 @@ print("main.R: Starting...")
 
 print("main.R: Installing/verifying packages...")
 # Package names
-packages <- c("minpack.lm", "snowfall", "doParallel", "lme4", "BiocManager")
+packages <- c("minpack.lm", "snowfall", "doParallel", "lme4", "BiocManager", "qvalue")
 # Install packages that aren't already there
 installed_packages <- packages %in% rownames(installed.packages())
 if (any(installed_packages == FALSE)) {

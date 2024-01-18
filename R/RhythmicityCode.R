@@ -225,8 +225,8 @@ intshiftNULL <- intshift
 B <- 10
 for(b in 1:B){
   if(b%%50 == 0) print(b)
-  file_old <- paste0(".",'null_old_',b,'.rdata')
-  file_young <- paste0(".",'null_young_',b,'.rdata')
+  file_old <- paste0("./",'null_old_',b,'.rdata')
+  file_young <- paste0("./",'null_young_',b,'.rdata')
   null_para_old <- get(load(file_old))
   null_para_young <- get(load(file_young))
   

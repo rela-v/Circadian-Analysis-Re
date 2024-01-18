@@ -36,16 +36,14 @@ sfExport("GeneIndeces")
 
 indRIM<-c()
 sfExport("bestModelSelection") ##Very long, just running first 100 genes 
-indRIM<-sfLapply(1:100,function(x) try(bestModelSelection(x,new.data,covariables3,Diagnosis,UniqueID,VariableListOne,VariableListTwo),silent=TRUE ) ) 
+indRIM<-sfLapply(1:10,function(x) try(bestModelSelection(x,new.data,covariables3,Diagnosis,UniqueID,VariableListOne,VariableListTwo),silent=TRUE ) ) 
 sfStop()
 
 #Permutation to correct for p-value bias 
-rawdata8<-new.data[1:100,]
+rawdata8<-new.data[1:10,]
 B<-10
 #Corrected 
-setwd("./Results")
-system("mkdir -p DE/NullData")
-setwd("./DE/NullData")
+system("mkdir -p NullData")
 for(b in 1:B){
   print(b)
   set.seed(b)
@@ -54,14 +52,14 @@ for(b in 1:B){
   names(result_PVL3_SZ) <- rownames(rawdata8_b)
   sfExport("rawdata8_b")
   result_PVL3_SZ<-sfLapply(1:nrow(rawdata8_b),function(x) try(bestModelSelection(x,rawdata8_b,covariables3,Diagnosis,UniqueID,VariableListOne,VariableListTwo),silent=TRUE ) ) 
-  afile <- paste('DE_null_',b,'.rdata',sep='')
+  afile <- paste('./Results/DE/NullData/DE_null_',b,'.rdata',sep='')
   save(result_PVL3_SZ,file=afile)
 }
 
 RIM.NULL<-c()
 for(b in 1:10){
   print(b)
-  aNull<-get(load(paste("DE_null_", b,".rdata", sep = "")))
+  aNull<-get(load(paste("./Results/DE/NullData/DE_null_", b,".rdata", sep = "")))
   RIM.NULL[[b]]<-aNull
 }
 
@@ -80,12 +78,9 @@ for(i in 1:length(pval.biased)){
   p.corr[i]<-numerator[i]/denominator
   print(i) 
 } 
-bh.q<-p.adjust(p.corr, "BH")
-library(qvalue)
-q<-qvalue(p.corr)$qvalues
-result3<-data.frame(cbind(pval.biased, p.corr, bh.q, q))
-row.names(result3)<-row.names(new.data[1:100,])
-write.csv(result3, "../Example_result3.csv")
-#PWD: `./Results/DE/NullData/
-setwd("../../..")
-print("DE.R: Protocol complete.")
+# bh.q<-p.adjust(p.corr, "BH") 
+# library(qvalue)
+# q<-qvalue(p.corr)$qvalues
+result3<-data.frame(cbind(pval.biased)) #, p.corr, bh.q, q))
+row.names(result3)<-row.names(new.data[1:10,])
+write.csv(result3, "./Results/DE/Example_result3.csv")
