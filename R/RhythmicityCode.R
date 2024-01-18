@@ -19,6 +19,7 @@ top.control<-observed_para_c[order(observed_para_c$R2, decreasing = TRUE)[1:4],]
 index<-as.numeric(row.names(top.control))
 labels1<-clin_ctrl$Site
 specInfo<-"Control"
+system("mkdir -p ./Results/Rhythmicity/PDF")
 for(i in 1:nrow(top.control)){
   agene <- as.character(top.control$genes[i])
   fileName <- paste0('./Results/Rhythmicity/PDF/Top_Control',agene,'.pdf')
@@ -28,7 +29,7 @@ for(i in 1:nrow(top.control)){
 }
 
 ##Generate p/q values 
-system("mkdir -p nullFolder")
+system("mkdir -p ./nullFolder")
 setwd("./nullFolder/")
 groupName <- 'control'
 thisData <- expr.c
@@ -124,7 +125,7 @@ B<-10
 result <- foreach(b = 1:B) %dopar% {
   print(b)	
   library(minpack.lm)
-  source('./R/fitSinCurve.R')
+  source('../R/fitSinCurve.R')
   
   null_pare <- data.frame(A=numeric(n), phase=numeric(n), offset=numeric(n), peak=numeric(n), R2=numeric(n))
   null_para_file <- paste('null_',groupName,'_',b,'.rdata',sep='')
@@ -171,7 +172,7 @@ B<-10
 result <- foreach(b = 1:B) %dopar% {
   print(b)	
   library(minpack.lm)
-  source('./R/fitSinCurve.R')
+  source('../R/fitSinCurve.R')
   
   null_pare <- data.frame(A=numeric(n), phase=numeric(n), offset=numeric(n), peak=numeric(n), R2=numeric(n))
   null_para_file <- paste('null_',groupName,'_',b,'.rdata',sep='')

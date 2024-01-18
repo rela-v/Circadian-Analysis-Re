@@ -23,4 +23,3 @@ source("./R/RhythmicityCode.R")
 print("main.R: Running ./R/DE.R...")
 source("./R/DE.R")
 print("main.R: Routine Complete.\nSee Results in the `./Results/` folder.")
-

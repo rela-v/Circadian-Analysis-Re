@@ -1,6 +1,6 @@
 ## Using minpack.lm
 parStartVal <- list(A=3, phase=0, offset=0)
-fitSineCurve <- function(xx, observed, parStartVal) {
+fitSinCurve <- function(xx, observed, parStart=parStartVal) {
   print("fitSinCurve.R: Setting up for fitting.")
   # function to get predictions
   getPred <- function(parS, xx) {

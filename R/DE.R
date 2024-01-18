@@ -1,6 +1,6 @@
 ##DE Analysis 
-expr.c<-read.csv("./Example_data.csv", row.names = 1)
-clin_ctrl<-read.csv('./Example_clinical.csv', row.names = 1)
+expr.c<-read.csv("./Data/Example_data.csv", row.names = 1)
+clin_ctrl<-read.csv('./Data/Example_clinical.csv', row.names = 1)
 n<-nrow(expr.c)
 Symbols<-row.names(expr.c)
 
@@ -86,4 +86,6 @@ q<-qvalue(p.corr)$qvalues
 result3<-data.frame(cbind(pval.biased, p.corr, bh.q, q))
 row.names(result3)<-row.names(new.data[1:100,])
 write.csv(result3, "../Example_result3.csv")
+#PWD: `./Results/DE/NullData/
+setwd("../../..")
 print("DE.R: Protocol complete.")
