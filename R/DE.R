@@ -86,3 +86,4 @@ q<-qvalue(p.corr)$qvalues
 result3<-data.frame(cbind(pval.biased, p.corr, bh.q, q))
 row.names(result3)<-row.names(new.data[1:100,])
 write.csv(result3, "../Example_result3.csv")
+print("DE.R: Protocol complete.")

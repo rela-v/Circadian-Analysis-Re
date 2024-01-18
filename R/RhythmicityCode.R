@@ -1,3 +1,4 @@
+print("")
 library('minpack.lm')
 source('./R/fitSinCurve.R')
 expr.c<-read.csv("./Data/Example_data.csv", row.names = 1)
@@ -252,3 +253,4 @@ row.names(result2)<-observed_para_o$genes
 result2_sorted<-result2[order(result2$R2gainPvalue, decreasing = FALSE), ]
 setwd("../")
 write.csv(result2_sorted, "./Results/Rhythmicity/Example_Result2.csv")
+print("RhythmicityCode.R: Protocol complete.")
